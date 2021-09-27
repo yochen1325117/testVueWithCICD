@@ -1,0 +1,12 @@
+// 跟 Travis CI 說要使用哪種語言
+language: node_js
+// 指定語言的版本，這裡使用 'node' 代表最新的穩定版本
+node_js:
+ - node
+// 一樣安裝 node 的依賴包
+install:
+ - npm install
+// 告訴 Travis CI 要執行測試與打包
+script:
+ - npm run test:unit
+ - npm run build
