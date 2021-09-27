@@ -1,5 +1,5 @@
 export default {
     router: {
-      base: 'testVueWithCICD'
+      base: '/testVueWithCICD/'
     }
   }
