@@ -2,7 +2,6 @@ export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'nuxtProjectTest',
-    target: 'static',
     htmlAttrs: {
       lang: 'en'
     },
@@ -16,6 +15,7 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+  target: 'static',
   server: {
     port: 8087, // default: 3000
   },
