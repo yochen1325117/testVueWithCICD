@@ -31,6 +31,20 @@
       <p class="note-content">github -> project page -> setting -> page</p>
       <img src="@/assets/noteImage/githubPageSettingPage.png" />
     </div>
+    <div class="note-block">
+      <p class="note-title">nuxt 與 github page</p>
+      <p class="note-content">github page 使用的是靜態檔案</p>
+      <p class="note-content">nuxt 的靜態檔案需要build -> generate後存後在dist中</p>
+      <p class="note-content">若直接連接github page https://yochen1325117.github.io/testVueWithCICD/ 會是404</p>
+      <p class="note-content">https://yochen1325117.github.io/testVueWithCICD/dist 才會是頁面</p>
+      <p class="note-content">因此使用push-dir 的套件 將 dist 推至某branch</p>
+      <p class="note-content">再將github page 的brach指向dist的page</p>
+      <p class="note-content">package.json 加入以下指令</p>
+      <pre>
+          "deploy": "nuxt generate && git add . && git commit -m 'dist file' && push-dir --dir=dist --branch=pageBranch --cleanup"
+      </pre>
+      <p class="note-content">建好dist檔案 -> 把dist 推到“pageBranch”(自己取的)</p>
+    </div>
   </div>
 </template>
 

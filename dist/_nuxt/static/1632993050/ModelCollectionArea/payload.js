@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/ModelCollectionArea", {data:[{}],fetch:{},mutations:void 0});
