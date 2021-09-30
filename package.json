@@ -9,10 +9,15 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "babel-loader": "^8.2.2",
     "core-js": "^3.15.1",
     "nuxt": "^2.15.7"
   },
   "devDependencies": {
-    "push-dir": "^0.4.1"
+    "fiber": "^1.0.4",
+    "node-sass": "^6.0.1",
+    "push-dir": "^0.4.1",
+    "sass": "^1.42.1",
+    "sass-loader": "^10.2.0"
   }
 }
