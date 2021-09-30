@@ -7,7 +7,7 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "deploy": "git add . && git commit -m 'dist file' && push-dir --dir=dist --branch=pageBranch --cleanup -f"
+    "deploy": "git add . && git commit -m 'dist file' && push-dir --dir=dist --branch=pageBranch --cleanup --force"
   },
   "dependencies": {
     "babel-loader": "^8.2.2",
