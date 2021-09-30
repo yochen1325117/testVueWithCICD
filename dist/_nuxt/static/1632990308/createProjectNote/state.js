@@ -1,1 +1,0 @@
-window.__NUXT__=(function(a){return {staticAssetsBase:"\u002FtestVueWithCICD\u002F_nuxt\u002Fstatic\u002F1632990308",layout:"testNoteLayout",error:a,serverRendered:true,routePath:"\u002FcreateProjectNote",config:{_app:{basePath:"\u002FtestVueWithCICD\u002F",assetsPath:"\u002FtestVueWithCICD\u002F_nuxt\u002F",cdnURL:a}}}}(null));
