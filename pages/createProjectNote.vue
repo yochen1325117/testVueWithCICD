@@ -22,6 +22,7 @@
         script:
             - npm run build
             - npm run generate
+            - npm run deploy
         </pre>
       </p>
     </div>
