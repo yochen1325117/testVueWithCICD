@@ -1,6 +1,24 @@
 <template>
   <div class="createProjectNote-page">
     <div class="note-block">
+      <p class="note-title">相關檔案、連結</p>
+      <p class="note-content">
+        <a href="https://www.jianshu.com/p/7517255bc056" target="_blank">
+          使用Travis-CI构建Android项目并自动打包部署到GitHub-Release
+        </a>
+      </p>
+      <p class="note-content">
+        <a href="https://www.nuxtjs.cn/faq/github-pages" target="_blank">
+          如何部署至GitHub Pages？
+        </a>
+      </p>
+      <p class="note-content">
+        <a href="https://github.com/yochen1325117/testVueWithCICD/blob/master/.travis.yml" target="_blank">
+          .travis.yml
+        </a>
+      </p>
+    </div>
+    <div class="note-block">
       <p class="note-title">nuxt 建立</p>
       <p class="note-content">npx create-nuxt-app project-name</p>
     </div>
@@ -22,7 +40,6 @@
         script:
             - npm run build
             - npm run generate
-            - npm run deploy
         </pre>
       </p>
     </div>
@@ -40,7 +57,7 @@
       <p class="note-content">因此在 .travis.yml 添加 deploy 將 dist 資料夾推到某個tranch</p>
       <p class="note-content">再將github page 的brach指向dist的page</p>
       <p class="note-content">.travis.yml 加入以下指令 在最後面</p>
-      <pre>
+      <pre class="code-block">
           deploy:
             provider: pages
             skip-cleanup: true
@@ -88,11 +105,14 @@ export default {
             .note-content {
                 font-size: 18px;
                 margin: 0px 0px 25px 35px;
+                a {
+                  color: black;
+                }
             }
             img {
                 width: 100%;
             }
-            pre {
+            .code-block {
                 padding: 15px 0;
                 background-color: rgba(0, 0, 0, 1);
                 color: rgb(21,178,2);
