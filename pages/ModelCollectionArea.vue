@@ -52,7 +52,7 @@
           >
             <img
               class="horizontal-image"
-              :style="{ transform: `translate(${imageMove * 300}px, 0px)` }"
+              :style="{ transform: `translate(${imageMove * 400}px, 0px)` }"
               :src="
                 require(`@/assets/modelImage/${modelData.id}${imageDataNumber}.jpg`)
               "
@@ -74,7 +74,6 @@ export default {
   layout: "testNoteLayout",
   name: "ModelCollectionArea",
   data() {
-    console.log("modelCollectionImageLinstJson", modelCollectionImageLinstJson);
     return {
       modelCollectionImageLinstJson,
       imageShow: "straight",
@@ -86,11 +85,9 @@ export default {
       this.$data.imageShow = way;
     },
     imageMoveLeft: function imageMoveLeft() {
-      console.log("imageMoveLeft");
       this.$data.imageMove = this.$data.imageMove - 1;
     },
     imageMoveRight: function imageMoveRight() {
-      console.log("imageMoveRight");
       this.$data.imageMove = this.$data.imageMove + 1;
     },
   },

@@ -1,9 +1,9 @@
 <template>
     <div class="testNoteLayout">
         <div class="chenblock--header">
-          <a class="navigation-link" href="/">練習筆記-銓</a>
-          <a class="navigation-link" href="/createProjectNote">部署/建立筆記-銓</a>
-          <a class="navigation-link" href="/ModelCollectionArea">公仔照片筆記-銓</a>
+          <a class="navigation-link" href="/testVueWithCICD/">練習筆記-銓</a>
+          <a class="navigation-link" href="/testVueWithCICD/createProjectNote">部署/建立筆記-銓</a>
+          <a class="navigation-link" href="/testVueWithCICD/ModelCollectionArea">公仔照片筆記-銓</a>
         </div>
         <Nuxt ref="main-block" />
     </div>
