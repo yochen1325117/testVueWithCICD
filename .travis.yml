@@ -7,9 +7,11 @@ script:
  - npm run build
  - npm run generate
 deploy:
-  provider: dist
+  provider: yo.chen
   skip_cleanup: true
+  target-branch: pageBranch
+  local-dir: dist
   github_token: $GITGUB_TOKEN_TEST
   keep_history: true
   on:
-    branch: pageBranch
+    branch: master
