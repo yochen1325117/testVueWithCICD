@@ -37,13 +37,25 @@
       <p class="note-content">nuxt 的靜態檔案需要build -> generate後存後在dist中</p>
       <p class="note-content">若直接連接github page https://yochen1325117.github.io/testVueWithCICD/ 會是404</p>
       <p class="note-content">https://yochen1325117.github.io/testVueWithCICD/dist 才會是頁面</p>
-      <p class="note-content">因此使用push-dir 的套件 將 dist 推至某branch</p>
+      <p class="note-content">因此在 .travis.yml 添加 deploy 將 dist 資料夾推到某個tranch</p>
       <p class="note-content">再將github page 的brach指向dist的page</p>
-      <p class="note-content">package.json 加入以下指令</p>
+      <p class="note-content">.travis.yml 加入以下指令 在最後面</p>
       <pre>
-          "deploy": "nuxt generate && git add . && git commit -m 'dist file' && push-dir --dir=dist --branch=pageBranch --cleanup"
+          deploy:
+            provider: pages
+            skip-cleanup: true
+            github-token: $GITHUB_TOKEN_FOR_TRAVIS
+            target-branch: pageBranch
+            local-dir: dist
+            on:
+                branch: master
       </pre>
-      <p class="note-content">建好dist檔案 -> 把dist 推到“pageBranch”(自己取的)</p>
+      <p class="note-content">skip-cleanup: travis 部屬時會清空dist，下skip-cleanup避免dist被清空</p>
+      <p class="note-content">github-token: 先至 Settings/Developer settings/Personal access tokens 生一個給travis用的token</p>
+      <p class="note-content">target-branch: 準備推到哪個branch</p>
+      <p class="note-content">local-dir: 準備推什麼進去</p>
+      <p class="note-content">on: 這個deply需要在哪個branch部署時執行</p>
+      <p class="note-content">建好dist檔案 -> 把dist 推到 “pageBranch”(自己取的)</p>
     </div>
   </div>
 </template>

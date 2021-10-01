@@ -6,8 +6,7 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate",
-    "deploy": "nuxt generate && push-dir --dir=dist --branch=pageBranch --cleanup"
+    "generate": "nuxt generate"
   },
   "dependencies": {
     "babel-loader": "^8.2.2",

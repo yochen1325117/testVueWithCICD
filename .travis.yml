@@ -6,12 +6,9 @@ install:
 script:
  - npm run build
  - npm run generate
- - echo "Skipping tests"
- - echo $GITHUB_TOKEN_FOR_TRAVIS
 deploy:
   provider: pages
   skip-cleanup: true
-  api_key: $GITHUB_TOKEN_FOR_TRAVIS
   github-token: $GITHUB_TOKEN_FOR_TRAVIS
   target-branch: pageBranch
   local-dir: dist
