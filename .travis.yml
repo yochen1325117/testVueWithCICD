@@ -6,13 +6,12 @@ install:
 script:
  - npm run build
  - npm run generate
-script:
-  - echo "Skipping tests"
-  - echo $GITHUB_ACCESS_TOKEN
+ - echo "Skipping tests"
+ - echo $GITHUB_TOKEN
 deploy:
   provider: pages
   skip-cleanup: true
-  github-token: $GITHUB_ACCESS_TOKEN
+  github-token: $GITHUB_TOKEN
   target-branch: pageBranch
   local-dir: dist
   on:
