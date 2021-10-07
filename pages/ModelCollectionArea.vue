@@ -1,13 +1,15 @@
 <template>
   <div class="ModelCollectionArea">
     <p>ModelCollectionArea</p>
-    <div v-for="modelData in modelCollectionImageLinstJson" :key="`changeblock-${modelData.id}`">
-      <button @click="clickModel(modelData.id)">{{ modelData.title }}</button>
+    <div class="change-button-block">
+      <div
+        v-for="modelData in modelCollectionImageLinstJson"
+        :key="`changeblock-${modelData.id}`"
+      >
+        <button @click="clickModel(modelData.id)">{{ modelData.title }}</button>
+      </div>
     </div>
-    <div
-      v-if="seeNow && seeNow.id"
-      class="collection-block"
-    >
+    <div v-if="seeNow && seeNow.id" class="collection-block">
       <p>作品來源: {{ seeNow.Origin }}</p>
       <p>標題: {{ seeNow.title }}</p>
       <p v-if="seeNow.content">內容介紹: {{ seeNow.content }}</p>
@@ -42,7 +44,11 @@
           />
         </div>
       </div>
-      <FlyAwayImageComponent :imageNumber="seeNow.imageNumber" :modelData="seeNow" imageShow="straight" />
+      <FlyAwayImageComponent
+        :imageNumber="seeNow.imageNumber"
+        :modelData="seeNow"
+        imageShow="straight"
+      />
       <div>
         <div
           class="horizontal-image-block--pc"
@@ -83,13 +89,13 @@
 
 <script>
 import modelCollectionImageLinstJson from "@/static/modelCollectionImageLinstJson";
-import FlyAwayImageComponent from '~/components/FlyAwayImageComponent';
+import FlyAwayImageComponent from "~/components/FlyAwayImageComponent";
 
 export default {
   layout: "testNoteLayout",
   name: "ModelCollectionArea",
   components: {
-    FlyAwayImageComponent
+    FlyAwayImageComponent,
   },
   data() {
     return {
@@ -110,10 +116,12 @@ export default {
       this.$data.imageMove = this.$data.imageMove + 1;
     },
     clickModel: function clickModel(modelId) {
-      const modelList = modelCollectionImageLinstJson.filter(modelJsonData => modelJsonData.id === modelId);
+      const modelList = modelCollectionImageLinstJson.filter(
+        (modelJsonData) => modelJsonData.id === modelId
+      );
       this.$data.seeNow = (modelList && modelList[0]) || {};
       this.$data.imageMove = 0;
-    }
+    },
   },
   head() {
     return {
@@ -126,6 +134,17 @@ export default {
 .ModelCollectionArea {
   margin: 30px auto;
   padding: 0 30px;
+  .change-button-block {
+    display: flex;
+    button {
+      margin: 0 20px;
+      border: 2px solid black;
+      border-radius: 4px;
+      color: black;
+      background-color: white;
+      padding: 8px 10px;
+    }
+  }
   .collection-block {
     .straight-image-block--pc {
       @media (max-width: 675px) {
