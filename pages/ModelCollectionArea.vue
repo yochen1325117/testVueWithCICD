@@ -27,7 +27,7 @@
           橫的
         </button>
       </div>
-      <div class="straight-image-block" v-if="imageShow === 'straight'">
+      <div class="straight-image-block--pc" v-if="imageShow === 'straight'">
         <div
           class="image-block"
           v-for="imageDataNumber in modelData.imageNumber"
@@ -40,25 +40,37 @@
           />
         </div>
       </div>
+      <FlyAwayImageComponent :imageNumber="modelData.imageNumber" :modelData="modelData" imageShow="straight" />
       <div>
-        <div class="horizontal-image-block" v-if="imageShow === 'horizontal'">
-          <button v-if="imageMove+modelData.imageNumber > 1" @click="imageMoveLeft" class="image-move-left--button">
+        <div
+          class="horizontal-image-block--pc"
+          v-if="imageShow === 'horizontal'"
+        >
+          <button
+            v-if="imageMove + modelData.imageNumber > 1"
+            @click="imageMoveLeft"
+            class="image-move-left--button"
+          >
             L
           </button>
           <div
             class="image-block"
             v-for="imageDataNumber in modelData.imageNumber"
             :key="`${modelData.id}_${modelData.title}_${imageDataNumber}`"
+            :style="{ transform: `translate(${imageMove * 400}px, 0px)` }"
           >
             <img
               class="horizontal-image"
-              :style="{ transform: `translate(${imageMove * 400}px, 0px)` }"
               :src="
                 require(`@/assets/modelImage/${modelData.id}${imageDataNumber}.jpg`)
               "
             />
           </div>
-          <button v-if="imageMove < 0" @click="imageMoveRight" class="image-move-right--button">
+          <button
+            v-if="imageMove < 0"
+            @click="imageMoveRight"
+            class="image-move-right--button"
+          >
             R
           </button>
         </div>
@@ -69,15 +81,21 @@
 
 <script>
 import modelCollectionImageLinstJson from "@/static/modelCollectionImageLinstJson";
+import FlyAwayImageComponent from '~/components/FlyAwayImageComponent';
 
 export default {
   layout: "testNoteLayout",
   name: "ModelCollectionArea",
+  components: {
+    FlyAwayImageComponent
+  },
   data() {
     return {
       modelCollectionImageLinstJson,
       imageShow: "straight",
       imageMove: 0,
+      mobileImageMove: [],
+      touchList: [],
     };
   },
   methods: {
@@ -89,7 +107,7 @@ export default {
     },
     imageMoveRight: function imageMoveRight() {
       this.$data.imageMove = this.$data.imageMove + 1;
-    },
+    }
   },
   head() {
     return {
@@ -103,7 +121,10 @@ export default {
   margin: 30px auto;
   padding: 0 30px;
   .collection-block {
-    .straight-image-block {
+    .straight-image-block--pc {
+      @media (max-width: 675px) {
+        display: none;
+      }
       .image-block {
         display: block;
         img {
@@ -112,19 +133,22 @@ export default {
         }
       }
     }
-    .horizontal-image-block {
+    .horizontal-image-block--pc {
       display: flex;
       overflow: hidden;
       height: 300px;
       padding: 20px 0;
       position: relative;
+      @media (max-width: 675px) {
+        display: none;
+      }
       .image-block {
         margin: 5px 20px;
         height: 100%;
+        transition: transform 1s;
         img {
           height: 100%;
           width: 350px;
-          transition: transform 1s;
           object-fit: scale-down;
         }
       }
@@ -168,6 +192,42 @@ export default {
       }
       .active-button {
         background-color: cadetblue;
+      }
+    }
+    .horizontal-image-block--mobile {
+      display: none;
+      position: relative;
+      @media (max-width: 675px) {
+        display: block;
+        position: relative;
+        width: 100%;
+        height: 300px;
+        .image-block {
+          width: 100%;
+          position: absolute;
+          transition: left 1s, right 1s;
+        }
+        .horizontal-image {
+          width: 100%;
+        }
+        .image-move-right--button,
+        .image-move-left--button {
+          top: 50%;
+          height: 150px;
+          transform: translate(0px, -50%);
+          background-color: rgba(192, 192, 192, 0.9);
+          border-color: rgba(0, 0, 0, 0.5);
+          border-radius: 4px;
+          width: 50px;
+          position: absolute;
+          z-index: 99;
+        }
+        .image-move-right--button {
+          right: 0;
+        }
+        .image-move-left--button {
+          left: 0;
+        }
       }
     }
   }

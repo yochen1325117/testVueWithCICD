@@ -8,16 +8,6 @@
         <Nuxt ref="main-block" />
     </div>
 </template>
-
-<script>
-export default {
-  head() {
-    return {
-      title: '練習筆記-銓'
-    };
-  },
-};
-</script>
 <style lang="scss">
   body {
     margin: 0;

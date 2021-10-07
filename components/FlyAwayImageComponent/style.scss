@@ -1,0 +1,15 @@
+.straight-image-block--mobile {
+    display: none;
+    @media (max-width: 675px) {
+      display: block;
+      position: relative;
+    }
+    .image-block {
+      display: block;
+      position: absolute;
+      img {
+        width: 100%;
+        border: 2px solid black;
+      }
+    }
+}

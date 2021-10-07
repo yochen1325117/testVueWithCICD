@@ -1,9 +1,9 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'nuxtProjectTest',
+    title: 'nuxt && github page test Area - 銓',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'zh-tw'
     },
     meta: [
       { charset: 'utf-8' },
@@ -12,7 +12,7 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/jpg', href: '/icon.jpg' }
     ]
   },
   target: 'static',

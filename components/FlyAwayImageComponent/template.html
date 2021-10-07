@@ -1,0 +1,19 @@
+<div
+    class="straight-image-block--mobile"
+    @touchstart="getTouchStart"
+    @touchmove="touchmove"
+    @touchend="getTouchEnd"
+>
+    <div
+      class="image-block"
+      v-for="imageDataNumber in imageNumber"
+      :key="`${modelList.id}_${modelList.title}_${imageDataNumber}`"
+      :style="{ 'z-index': firstImageNum === imageDataNumber ? '99' : '1' }"
+    >
+      <img
+        :src="
+          require(`@/assets/modelImage/${modelList.id}${imageDataNumber}.jpg`)
+        "
+      />
+    </div>
+</div>
