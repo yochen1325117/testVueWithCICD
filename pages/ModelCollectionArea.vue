@@ -1,15 +1,17 @@
 <template>
   <div class="ModelCollectionArea">
     <p>ModelCollectionArea</p>
+    <div v-for="modelData in modelCollectionImageLinstJson" :key="`changeblock-${modelData.id}`">
+      <button @click="clickModel(modelData.id)">{{ modelData.title }}</button>
+    </div>
     <div
+      v-if="seeNow && seeNow.id"
       class="collection-block"
-      :key="modelData.id"
-      v-for="modelData in modelCollectionImageLinstJson"
     >
-      <p>作品來源: {{ modelData.Origin }}</p>
-      <p>標題: {{ modelData.title }}</p>
-      <p v-if="modelData.content">內容介紹: {{ modelData.content }}</p>
-      <p v-if="modelData.description">物品描述: {{ modelData.description }}</p>
+      <p>作品來源: {{ seeNow.Origin }}</p>
+      <p>標題: {{ seeNow.title }}</p>
+      <p v-if="seeNow.content">內容介紹: {{ seeNow.content }}</p>
+      <p v-if="seeNow.description">物品描述: {{ seeNow.description }}</p>
       <p>圖片顯示方式:</p>
       <div class="change-image-show-button--block">
         <button
@@ -30,24 +32,24 @@
       <div class="straight-image-block--pc" v-if="imageShow === 'straight'">
         <div
           class="image-block"
-          v-for="imageDataNumber in modelData.imageNumber"
-          :key="`${modelData.id}_${modelData.title}_${imageDataNumber}`"
+          v-for="imageDataNumber in seeNow.imageNumber"
+          :key="`${seeNow.id}_${seeNow.title}_${imageDataNumber}`"
         >
           <img
             :src="
-              require(`@/assets/modelImage/${modelData.id}${imageDataNumber}.jpg`)
+              require(`@/assets/modelImage/${seeNow.id}${imageDataNumber}.jpg`)
             "
           />
         </div>
       </div>
-      <FlyAwayImageComponent :imageNumber="modelData.imageNumber" :modelData="modelData" imageShow="straight" />
+      <FlyAwayImageComponent :imageNumber="seeNow.imageNumber" :modelData="seeNow" imageShow="straight" />
       <div>
         <div
           class="horizontal-image-block--pc"
           v-if="imageShow === 'horizontal'"
         >
           <button
-            v-if="imageMove + modelData.imageNumber > 1"
+            v-if="imageMove + seeNow.imageNumber > 1"
             @click="imageMoveLeft"
             class="image-move-left--button"
           >
@@ -55,14 +57,14 @@
           </button>
           <div
             class="image-block"
-            v-for="imageDataNumber in modelData.imageNumber"
-            :key="`${modelData.id}_${modelData.title}_${imageDataNumber}`"
+            v-for="imageDataNumber in seeNow.imageNumber"
+            :key="`${seeNow.id}_${seeNow.title}_${imageDataNumber}`"
             :style="{ transform: `translate(${imageMove * 400}px, 0px)` }"
           >
             <img
               class="horizontal-image"
               :src="
-                require(`@/assets/modelImage/${modelData.id}${imageDataNumber}.jpg`)
+                require(`@/assets/modelImage/${seeNow.id}${imageDataNumber}.jpg`)
               "
             />
           </div>
@@ -94,8 +96,7 @@ export default {
       modelCollectionImageLinstJson,
       imageShow: "straight",
       imageMove: 0,
-      mobileImageMove: [],
-      touchList: [],
+      seeNow: {},
     };
   },
   methods: {
@@ -107,6 +108,11 @@ export default {
     },
     imageMoveRight: function imageMoveRight() {
       this.$data.imageMove = this.$data.imageMove + 1;
+    },
+    clickModel: function clickModel(modelId) {
+      const modelList = modelCollectionImageLinstJson.filter(modelJsonData => modelJsonData.id === modelId);
+      this.$data.seeNow = (modelList && modelList[0]) || {};
+      this.$data.imageMove = 0;
     }
   },
   head() {

@@ -23,7 +23,6 @@ export default {
       return ({
         touchX: 0,
         touchY: 0,
-        modelList: this.$props.modelData,
         imageZNumber,
         firstImageNum: 1,
       })
