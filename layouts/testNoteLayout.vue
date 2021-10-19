@@ -9,6 +9,14 @@
         <Nuxt ref="main-block" />
     </div>
 </template>
+<script>
+export default {
+  beforeCreate(to, from, next) {
+    console.log('beforeCreate');
+  }
+};
+</script>
+
 <style lang="scss">
   body {
     margin: 0;

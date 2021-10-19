@@ -10,9 +10,8 @@
         <h2 class="text-2xl leading-7 font-semibold">
           Welcome to yochen Nuxt Application test project
         </h2>
-        <p class="mt-3 text-gray-600">
-          Ahoy~Ahoy~ 
-        </p>
+        <p class="mt-3 text-gray-600" style="text-size-adjust: auto;">Ahoy~Ahoy~ text-size-adjust: auto</p>
+        <p class="mt-3 text-gray-600" style="text-size-adjust: none;">Ahoy~Ahoy~ text-size-adjust: none</p>
       </div>
     </div>
   </div>
