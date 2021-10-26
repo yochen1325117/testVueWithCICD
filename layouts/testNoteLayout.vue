@@ -6,7 +6,9 @@
           <a class="navigation-link" href="/testVueWithCICD/ModelCollectionArea">公仔照片筆記-銓</a>
           <a class="navigation-link" href="/testVueWithCICD/TestGetSomethingFromOutside">抓抓-銓</a>
         </div>
-        <Nuxt ref="main-block" />
+        <div class="testNote-body">
+          <Nuxt ref="main-block" />
+        </div>
     </div>
 </template>
 <script>
@@ -39,6 +41,9 @@ export default {
         border: 1px solid blueviolet;
         background: black;
       }
+    }
+    .testNote-body {
+      margin: 20px;
     }
   }
 </style>
