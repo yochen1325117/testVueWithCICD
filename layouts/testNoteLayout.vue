@@ -5,6 +5,7 @@
           <a class="navigation-link" href="/testVueWithCICD/createProjectNote">部署/建立筆記-銓</a>
           <a class="navigation-link" href="/testVueWithCICD/ModelCollectionArea">公仔照片筆記-銓</a>
           <a class="navigation-link" href="/testVueWithCICD/TestGetSomethingFromOutside">抓抓-銓</a>
+          <a class="navigation-link" href="/testVueWithCICD/imageAnimation">圖片動畫測試-銓</a>
         </div>
         <div class="testNote-body">
           <Nuxt ref="main-block" />
