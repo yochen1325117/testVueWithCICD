@@ -10,7 +10,7 @@
       </p>
       <div
         class="animation-list"
-        :style="{ 'max-height': animationButtonListShow ? '200px' : '0px' }"
+        :style="{ 'max-height': animationButtonListShow ? '900px' : '0px' }"
       >
         <p
           v-for="animation in animationListText"
@@ -34,12 +34,21 @@ export default {
   data() {
     return {
       animationButtonListShow: false,
-      animationListText: ["bounce", "flash"],
+      animationListText: [
+        "default",
+        "bounce",
+        "flash",
+        "pulse",
+        "rubberBand",
+        "shakeX",
+        "shakeY"
+      ],
     };
   },
   methods: {
     giveImageAnimation(animationText) {
       console.log("animationText", animationText);
+      document.getElementsByTagName("img")[0].className = animationText;
     },
   },
   head() {
@@ -54,10 +63,9 @@ export default {
 .imageAnimation-page {
   .image-block-1 {
     margin: 0 auto;
-    width: 60%;
+    width: 200px;
     img {
       width: 100%;
-      animation: ease-in 5s bounce;
     }
   }
   .animation-list-block {
@@ -80,7 +88,7 @@ export default {
     .animation-list {
       background-color: rgba(192, 189, 189, 0.623);
       text-align: center;
-      transition: max-height 2s;
+      transition: max-height 1s;
       animation: ease-in-out;
       overflow: hidden;
       p {
@@ -93,10 +101,88 @@ export default {
       }
     }
   }
+  .bounce {
+    animation: 0.8s bounce infinite;
+  }
   @keyframes bounce {
-    0% { transform: translate(0%, 0%); }
-    50% { transform: translate(0%, 50%); }
-    100% { transform: translate(0%, 0%); }
+    0%,
+    100% {
+      transform: translate(0%, -50px);
+    }
+    50% {
+      transform: translate(0%, 0px);
+    }
+  }
+
+  .flash {
+    animation: 0.8s flash infinite;
+  }
+  @keyframes flash {
+    0%,
+    100% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  .pulse {
+    animation: 1s pulse infinite;
+  }
+  @keyframes pulse {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+  }
+  .rubberBand {
+    animation: 1s rubberBand infinite;
+  }
+  @keyframes rubberBand {
+    0%,
+    100% {
+      transform: scale3D(1, 1, 1);
+    }
+    25%,
+    75% {
+      transform: scale3D(1.5, 0.5, 1);
+    }
+    50% {
+      transform: scale3D(1.25, 0.75, 1);
+    }
+  }
+  .shakeX {
+    animation: .5s shakeX infinite;
+    animation-fill-mode: both;
+  }
+  @keyframes shakeX {
+    0%, 100% {
+      transform: translateX(0px);
+    }
+    10%, 30%, 50%, 70%, 90% {
+      transform: translateX(5px);
+    }
+    20%, 40%, 60%, 80% {
+      transform: translateX(-5px);
+    }
+  }
+    .shakeY {
+    animation: .5s shakeY infinite;
+    animation-fill-mode: both;
+  }
+  @keyframes shakeY {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    10%, 30%, 50%, 70%, 90% {
+      transform: translateY(5px);
+    }
+    20%, 40%, 60%, 80% {
+      transform: translateY(-5px);
+    }
   }
 }
 </style>
