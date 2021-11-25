@@ -7,7 +7,7 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "deploy": "git status && git add . && git commit -m 'gogo test'"
+    "deploy": "git status && git add . && git commit -m 'gogo test' && git push origin "
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
