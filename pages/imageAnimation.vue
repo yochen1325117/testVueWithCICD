@@ -41,7 +41,12 @@ export default {
         "pulse",
         "rubberBand",
         "shakeX",
-        "shakeY"
+        "shakeY",
+        "swing",
+        "backInDown",
+        "backOutDown",
+        "bounceInLeft",
+        "bounceOutRight"
       ],
     };
   },
@@ -63,15 +68,18 @@ export default {
 .imageAnimation-page {
   .image-block-1 {
     margin: 0 auto;
-    width: 200px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
     img {
-      width: 100%;
+      width: 200px;
     }
   }
   .animation-list-block {
     position: fixed;
     right: 2%;
     text-align: right;
+    z-index: 999;
     .show-button {
       display: inline-block;
       background-color: rgba(0, 175, 22, 0.7);
@@ -103,19 +111,27 @@ export default {
   }
   .bounce {
     animation: 0.8s bounce infinite;
+    // animation-timing-function: cubic-bezier(0.71, 1.15, 1, 1.34);
+    animation-timing-function: linear;
   }
   @keyframes bounce {
     0%,
     100% {
+      transform: translate(0%, 0px);
+    }
+    25% {
       transform: translate(0%, -50px);
     }
     50% {
       transform: translate(0%, 0px);
     }
+    75% {
+      transform: translate(0%, -25px);
+    }
   }
-
   .flash {
     animation: 0.8s flash infinite;
+    animation-timing-function: cubic-bezier(0.65, 0.54, 1, 1.68);
   }
   @keyframes flash {
     0%,
@@ -155,33 +171,150 @@ export default {
     }
   }
   .shakeX {
-    animation: .5s shakeX infinite;
+    animation: 0.5s shakeX infinite;
     animation-fill-mode: both;
   }
   @keyframes shakeX {
-    0%, 100% {
+    0%,
+    100% {
       transform: translateX(0px);
     }
-    10%, 30%, 50%, 70%, 90% {
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
       transform: translateX(5px);
     }
-    20%, 40%, 60%, 80% {
+    20%,
+    40%,
+    60%,
+    80% {
       transform: translateX(-5px);
     }
   }
-    .shakeY {
-    animation: .5s shakeY infinite;
+  .shakeY {
+    animation: 0.5s shakeY infinite;
     animation-fill-mode: both;
   }
   @keyframes shakeY {
-    0%, 100% {
+    0%,
+    100% {
       transform: translateY(0px);
     }
-    10%, 30%, 50%, 70%, 90% {
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
       transform: translateY(5px);
     }
-    20%, 40%, 60%, 80% {
+    20%,
+    40%,
+    60%,
+    80% {
       transform: translateY(-5px);
+    }
+  }
+  .swing {
+    animation: 2s swing infinite;
+    animation-timing-function: linear;
+  }
+  @keyframes swing {
+    0%,
+    90%,
+    100% {
+      transform: rotate(0);
+    }
+    20% {
+      transform: rotate(45deg);
+    }
+    30% {
+      transform: rotate(0);
+    }
+    40% {
+      transform: rotate(-45deg);
+    }
+    50% {
+      transform: rotate(0);
+    }
+    60% {
+      transform: rotate(20deg);
+    }
+    70% {
+      transform: rotate(0);
+    }
+    80% {
+      transform: rotate(-20deg);
+    }
+  }
+  .backInDown {
+    animation: 2s backInDown infinite;
+    animation-timing-function: ease-out;
+  }
+  @keyframes backInDown {
+    0% {
+      opacity: 0;
+      transform: translate(0,-200px) scale(0.8);
+    }
+    30% {
+      opacity: 1;
+    }
+    70% {
+      opacity: 1;
+      transform: translate(0,0) scale(0.8);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  .backOutDown {
+    animation: 2s backOutDown infinite;
+    animation-timing-function: ease-in;
+  }
+  @keyframes backOutDown {
+    0% {
+      transform: translate(0,0) scale(1);
+    }
+    20% {
+      transform: scale(0.8);
+    }
+    100% {
+      transform: translate(0,900px);
+    }
+  }
+  .bounceInLeft {
+    transform-origin: 0 100%;
+    animation: 2s bounceInLeft infinite;
+    animation-timing-function: ease-in;
+  }
+  @keyframes bounceInLeft {
+    0% {
+      transform: translate(-900px,0) skew(40deg, 0deg);
+    }
+    30% {
+      transform: translate(0,0) skew(40deg, 0deg);
+    }
+    40% {
+      transform: translate(0,0) skew(-40deg, 0deg);
+    }
+    50% {
+      transform: translate(0,0) skew(20deg, 0deg);
+    }
+    60% {
+      transform: translate(0,0) skew(0deg, 0deg);
+    }
+  }
+  .bounceOutRight {
+    transform-origin: 0 50%;
+    animation: 2s bounceOutRight infinite;
+    animation-timing-function: ease-out;
+  }
+  @keyframes bounceOutRight {
+    0% {
+    }
+    100% {
+      transform: translate(900px,0) scaleX(1.5) scaleY(0);
     }
   }
 }
