@@ -18,7 +18,8 @@ export default {
   },
   target: 'static',
   server: {
-    port: 8087, // default: 3000
+    port: 80, // default: 3000
+    host: '0.0.0.0'
   },
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
