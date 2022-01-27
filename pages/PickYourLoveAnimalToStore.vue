@@ -13,7 +13,6 @@
 export default {
   layout: "testNoteLayout",
   data() {
-    console.log('this.$store.state.loveAnimal', this.$store.state.loveAnimal)
     return {
         animal: (this.$store.state.loveAnimal && this.$store.state.loveAnimal.text) || ''
     };

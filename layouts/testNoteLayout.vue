@@ -7,21 +7,20 @@
           <nuxt-link class="navigation-link" to="/TestGetSomethingFromOutside">抓抓-銓</nuxt-link>
           <nuxt-link class="navigation-link" to="/imageAnimation">圖片動畫測試-銓</nuxt-link>
           <nuxt-link class="navigation-link" to="/PickYourLoveAnimalToStore">你喜歡什麼動物呢-銓</nuxt-link>
+          <nuxt-link class="navigation-link" to="/ScrollLikePixelPage">滾動調整-銓</nuxt-link>
         </div>
         <div class="testNote-body">
           <Nuxt ref="main-block" />
         </div>
       <div v-if="!!animal" class="love-animal-block">
         <p v-if="!animal.text">你不喜歡小動物嗎？</p>
-        <p v-else>你喜歡的動物是：{{ animal.text }}</p>
+        <p v-else>這裡是state，要自己打才知道你喜歡的動物是：{{ animal.text }}</p>
+        <p>{{ getterAnimal }}</p>
       </div>
     </div>
 </template>
 <script>
 export default {
-  beforeCreate(to, from, next) {
-    console.log('beforeCreate');
-  },
   data() {
     return ({
     })
@@ -29,6 +28,9 @@ export default {
   computed: {
     animal() {
       return this.$store.state.loveAnimal || {};
+    },
+    getterAnimal() {
+      return this.$store.getters.showAnimalText;
     }
   }
 };
