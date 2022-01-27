@@ -123,7 +123,7 @@ export default {
           };
           break;
         case 2:
-          translateNum = (scrollY * 2.2 - catElement.offsetTop) / catElement.offsetTop;
+          translateNum = ((scrollY * 2 + 100) - catElement.offsetTop) / catElement.offsetTop;
           output = {
             extraStyle: {
               opacity: translateNum < 1 ? translateNum : 1
@@ -131,14 +131,13 @@ export default {
           };
           break;
         case 3:
-            
-          translateNum = catElement.offsetTop - (scrollY * 1.1)
+          translateNum = catElement.offsetTop - (scrollY - (50))
           if (translateNum < 0) { translateNum = 0 }
           else if (translateNum > 100) { translateNum = 100 }
           output = {
             imageStyle: {
               position: 'absolute',
-              'clip-path': `polygon(0% 0%, 100% 0%, 100% ${translateNum}%, 0% ${translateNum}%)`
+              'clip-path': `polygon(0% 0%, 100% 0%, 100% ${translateNum * 0.9}%, 0% ${translateNum * 0.9}%)`
             },
           };
           break;
