@@ -12,10 +12,16 @@
         <div class="testNote-body">
           <Nuxt ref="main-block" />
         </div>
-      <div v-if="!!animal" class="love-animal-block">
+      <div v-if="!!animal && !animalFixHidden" class="love-animal-block">
+        <p style="text-align: right">
+          <button @click="closeAnimalFixBlock()">X</button>
+        </p>
         <p v-if="!animal.text">你不喜歡小動物嗎？</p>
         <p v-else>這裡是state，要自己打才知道你喜歡的動物是：{{ animal.text }}</p>
         <p>{{ getterAnimal }}</p>
+      </div>
+      <div v-else-if="animalFixHidden" class="love-animal-block" @click="openAnimalFixBlock()">
+        X
       </div>
     </div>
 </template>
@@ -23,6 +29,7 @@
 export default {
   data() {
     return ({
+      animalFixHidden: true,
     })
   },
   computed: {
@@ -31,6 +38,14 @@ export default {
     },
     getterAnimal() {
       return this.$store.getters.showAnimalText;
+    }
+  },
+  methods: {
+    closeAnimalFixBlock: function() {
+      this.$data.animalFixHidden = true;
+    },
+    openAnimalFixBlock: function() {
+      this.$data.animalFixHidden = false;
     }
   }
 };
@@ -47,11 +62,19 @@ export default {
       display: flex;
       justify-content: flex-start;
       align-items: center;
+      @media (max-width: 767px) {
+        display: block;
+        height: auto;
+      }
       .navigation-link {
         margin: 0 15px;
         padding: 5px;
         border: 1px solid black;
         color: black;
+        @media (max-width: 767px) {
+          display: inline-block;
+          margin: 8px 10px;
+        }
       }
       .navigation-link:hover {
         color: white;
