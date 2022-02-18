@@ -39,8 +39,13 @@
       </button>
     </div>
     <div class="action-block">
-      <button class="del-button" @click="popAnswer()">del</button>
-      <button class="answer-button" @click="countAnswer()">count</button>
+      <button class="del-button" @click="popAnswer()">上一步</button>
+      <button class="answer-button" @click="countAnswer()">送出</button>
+    </div>
+    <div>
+      <p style="text-align: center">黃色為錯位</p>
+      <p style="text-align: center">藍色為正確</p>
+      <p style="text-align: center">紅色為未出現</p>
     </div>
   </div>
 </template>
@@ -49,7 +54,7 @@
 import randomMathQuestion from "random-math-question";
 
 export default {
-  layout: "testNoteLayout",
+  layout: "default",
   data() {
     return {
       questionList: [2, 3, "+", 4, 5, "=", 6, 8],
@@ -220,7 +225,7 @@ export default {
         }
         checkAnswer.status = answerStatus;
         answerNumberOptionList.map((option) => {
-          if (option.value === checkAnswer.value && option.status === "") {
+          if (+option.value === +checkAnswer.value && option.status === "") {
             option.status = answerStatus;
           }
         });
@@ -230,6 +235,8 @@ export default {
           }
         });
       });
+      this.$data.answerNumberOptionList = answerNumberOptionList;
+      this.$data.answerArithmeticOptionList = answerArithmeticOptionList;
       this.$data.answerNow += 1;
     },
     keyDown: function (key) {
@@ -273,12 +280,14 @@ export default {
           amountOfNumber: "2-3",
           operations: ["/", "*", "+", "-"],
         });
-        const questionParser = `${question.question}`.split(' ').join('');
-        const answerParser = `${question.answer}`.split(' ').join('');
-        checkQuestion = `${questionParser}=${answerParser}`
+        const questionParser = `${question.question}`.split(" ").join("");
+        const answerParser = `${question.answer}`.split(" ").join("");
+        if (answerParser > 0) {
+          checkQuestion = `${questionParser}=${answerParser}`;
+        }
       }
       console.log("checkQuestion", checkQuestion);
-      this.$data.questionList = checkQuestion.split('');
+      this.$data.questionList = checkQuestion.split("");
     },
   },
 };
