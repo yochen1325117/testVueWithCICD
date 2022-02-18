@@ -222,6 +222,7 @@ export default {
       checkList.map((checkAnswer, i) => {
         let answerStatus = "";
         if (checkAnswer.value === questionList[i]) {
+          includeList.splice(i, 1, '');
           checkAnswer.status = "correct-answer";
           answerStatus = "correct-answer";
         } else {
