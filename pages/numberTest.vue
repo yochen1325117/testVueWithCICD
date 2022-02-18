@@ -218,58 +218,60 @@ export default {
       const checkList = answerList[answerNow];
       let answerArithmeticOptionList = this.$data.answerArithmeticOptionList;
       let answerNumberOptionList = this.$data.answerNumberOptionList;
-      let includeList = [ ...questionList ];
+      let includeList = [...questionList];
       // 先找正確位置的正確答案
       checkList.map((checkAnswer, i) => {
         let answerStatus = "";
         if (checkAnswer.value === questionList[i]) {
-          includeList.splice(i, 1, '');
+          includeList.splice(i, 1, "");
           checkAnswer.status = "correct-answer";
           answerStatus = "correct-answer";
         }
-        checkAnswer.status = answerStatus;
         answerNumberOptionList = answerNumberOptionList.map((option) => {
           if (+option.value === +checkAnswer.value && option.status === "") {
             option.status = answerStatus;
           }
           return option;
         });
-        answerArithmeticOptionList = answerArithmeticOptionList.map((option) => {
-          if (option.value === checkAnswer.value && option.status === "") {
-            option.status = answerStatus;
+        answerArithmeticOptionList = answerArithmeticOptionList.map(
+          (option) => {
+            if (option.value === checkAnswer.value && option.status === "") {
+              option.status = answerStatus;
+            }
+            return option;
           }
-          return option;
-        });
+        );
       });
-      console.log('includeList', includeList);
-      console.log('questionList', questionList);
-      console.log('answerNumberOptionList', answerNumberOptionList);
-      console.log('answerArithmeticOptionList', answerArithmeticOptionList);
       // 再找錯誤位置正確答案跟錯誤答案
       checkList.map((checkAnswer, i) => {
         let answerStatus = "";
         if (checkAnswer.value !== questionList[i]) {
-          if (questionList.includes(checkAnswer.value) && includeList.includes(checkAnswer.value)) {
-            includeList.splice(questionList.indexOf(checkAnswer.value), 1, '');
+          if (
+            questionList.includes(checkAnswer.value) &&
+            includeList.includes(checkAnswer.value)
+          ) {
+            includeList.splice(questionList.indexOf(checkAnswer.value), 1, "");
             checkAnswer.status = "wrong-side";
             answerStatus = "wrong-side";
           } else {
             checkAnswer.status = "wrong-answer";
             answerStatus = "wrong-answer";
           }
+          answerNumberOptionList = answerNumberOptionList.map((option) => {
+            if (+option.value === +checkAnswer.value && option.status === "") {
+              option.status = answerStatus;
+            }
+            return option;
+          });
+          answerArithmeticOptionList = answerArithmeticOptionList.map(
+            (option) => {
+              if (option.value === checkAnswer.value && option.status === "") {
+                option.status = answerStatus;
+              }
+              return option;
+            }
+          );
         }
-        answerNumberOptionList = answerNumberOptionList.map((option) => {
-          if (+option.value === +checkAnswer.value && option.status === "") {
-            option.status = answerStatus;
-          }
-          return option;
-        });
-       answerArithmeticOptionList = answerArithmeticOptionList.map((option) => {
-          if (option.value === checkAnswer.value && option.status === "") {
-            option.status = answerStatus;
-          }
-          return option;
-        });
       });
       this.$data.answerNumberOptionList = answerNumberOptionList;
       this.$data.answerArithmeticOptionList = answerArithmeticOptionList;
