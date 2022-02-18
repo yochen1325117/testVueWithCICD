@@ -47,6 +47,7 @@
       <p style="text-align: center">藍色為正確</p>
       <p style="text-align: center">紅色為未出現</p>
     </div>
+    <div class="error-text-block" v-if="!!errorText">{{ errorText }}</div>
   </div>
 </template>
 
@@ -68,6 +69,7 @@ export default {
         value: "",
         status: "",
       },
+      errorText: "",
     };
   },
   mounted() {
@@ -126,7 +128,7 @@ export default {
       numberList.map((number) => {
         answerNumberOptionList.push({
           text: `${number}`,
-          value: number,
+          value: `${number}`,
           status: "",
         });
       });
@@ -194,12 +196,18 @@ export default {
           const equalList = submitSplitList[1];
           const googAnswer = +evalList === +equalList;
           if (!googAnswer) {
-            console.log("not goog answer");
+            this.$data.errorText = "罰你國小重讀";
+            setTimeout(() => {
+              this.$data.errorText = "";
+            }, 1000);
           } else {
             this.checkAnswer();
           }
         } else {
-          console.log("not goog answer");
+          this.$data.errorText = "罰你國小重讀";
+          setTimeout(() => {
+            this.$data.errorText = "";
+          }, 1000);
         }
       }
     },
@@ -210,13 +218,15 @@ export default {
       const checkList = answerList[answerNow];
       const answerArithmeticOptionList = this.$data.answerArithmeticOptionList;
       const answerNumberOptionList = this.$data.answerNumberOptionList;
+      let includeList = questionList;
       checkList.map((checkAnswer, i) => {
         let answerStatus = "";
         if (checkAnswer.value === questionList[i]) {
           checkAnswer.status = "correct-answer";
           answerStatus = "correct-answer";
         } else {
-          if (questionList.includes(checkAnswer.value)) {
+          if (questionList.includes(checkAnswer.value) && includeList.includes(checkAnswer.value)) {
+            includeList.splice(questionList.indexOf(checkAnswer.value), 1, '');
             checkAnswer.status = "wrong-side";
             answerStatus = "wrong-side";
           } else {
@@ -356,6 +366,20 @@ export default {
     .answer-button:active {
       background-color: rgba(0, 0, 0, 0.1);
     }
+  }
+  .error-text-block {
+    width: 50%;
+    height: 200px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 3px solid;
+    font-size: 3rem;
   }
 }
 </style>
