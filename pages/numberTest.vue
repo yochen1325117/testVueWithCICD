@@ -16,7 +16,7 @@
         </div>
       </div>
     </div>
-    <div class="answer-option" v-if="!passBlock && answerNow < 5">
+    <div class="answer-option" v-if="!passBlock && answerNow < 6">
       <button
         v-for="numberOption in answerNumberOptionList"
         :key="numberOption.value"
@@ -27,7 +27,7 @@
         {{ numberOption.text }}
       </button>
     </div>
-    <div class="answer-option" v-if="!passBlock && answerNow < 5">
+    <div class="answer-option" v-if="!passBlock && answerNow < 6">
       <button
         v-for="arithmeticOption in answerArithmeticOptionList"
         :key="arithmeticOption.value"
@@ -38,7 +38,7 @@
         {{ arithmeticOption.text }}
       </button>
     </div>
-    <div class="action-block" v-if="!passBlock && answerNow < 5">
+    <div class="action-block" v-if="!passBlock && answerNow < 6">
       <button class="del-button" @click="popAnswer()">{{ "&lt;=" }}</button>
       <button class="answer-button" @click="countAnswer()">送出</button>
     </div>
