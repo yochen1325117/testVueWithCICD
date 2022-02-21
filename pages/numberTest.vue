@@ -16,7 +16,7 @@
         </div>
       </div>
     </div>
-    <div class="answer-option">
+    <div class="answer-option" v-if="!passBlock && answerNow < 5">
       <button
         v-for="numberOption in answerNumberOptionList"
         :key="numberOption.value"
@@ -27,7 +27,7 @@
         {{ numberOption.text }}
       </button>
     </div>
-    <div class="answer-option">
+    <div class="answer-option" v-if="!passBlock && answerNow < 5">
       <button
         v-for="arithmeticOption in answerArithmeticOptionList"
         :key="arithmeticOption.value"
@@ -38,16 +38,34 @@
         {{ arithmeticOption.text }}
       </button>
     </div>
-    <div class="action-block">
-      <button class="del-button" @click="popAnswer()">上一步</button>
+    <div class="action-block" v-if="!passBlock && answerNow < 5">
+      <button class="del-button" @click="popAnswer()">{{ "&lt;=" }}</button>
       <button class="answer-button" @click="countAnswer()">送出</button>
     </div>
-    <div>
-      <p style="text-align: center">黃色為錯位</p>
-      <p style="text-align: center">藍色為正確</p>
-      <p style="text-align: center">紅色為未出現</p>
+    <div class="example-block">
+      <div
+        class="example-color-block"
+        :style="{ backgroundColor: answerBackground('wrong-side') }"
+      ></div>
+      <p class="example-text">表示錯位</p>
+      <div
+        class="example-color-block"
+        :style="{ backgroundColor: answerBackground('correct-answer') }"
+      ></div>
+      <p class="example-text">表示正確</p>
+      <div
+        class="example-color-block"
+        :style="{ backgroundColor: answerBackground('wrong-answer') }"
+      ></div>
+      <p class="example-text">表示未出現</p>
     </div>
     <div class="error-text-block" v-if="!!errorText">{{ errorText }}</div>
+    <div class="pass-text-block" v-if="!!passBlock">
+      <p>恭喜過關</p>
+      <p>你總共嘗試了{{ answerNow }}次</p>
+      <p>重新整理可以再玩一次唷</p>
+      <button class="refresh-button" @click="() => { this.$router.go(0); }">重新整理</button>
+    </div>
   </div>
 </template>
 
@@ -70,6 +88,7 @@ export default {
         status: "",
       },
       errorText: "",
+      passBlock: false,
     };
   },
   mounted() {
@@ -86,9 +105,9 @@ export default {
       if (status === "" || status === "not-check") {
         return "transparent";
       } else if (status === "wrong-side") {
-        return "yellow";
+        return "#deb3cf";
       } else if (status === "wrong-answer") {
-        return "red";
+        return "#EEB8B8";
       } else if (status === "correct-answer") {
         return "#b0e0e6";
       }
@@ -273,6 +292,12 @@ export default {
           );
         }
       });
+      const clearPass = checkList.filter(ans => (ans.status === 'wrong-side' || ans.status === 'wrong-answer' || ans.status === ''));
+      if (clearPass.length === 0) {
+        this.$data.passBlock = true;
+      } else if (this.$data.answerNow === 5) {
+        this.$data.errorText = "罰你國小重讀";
+      }
       this.$data.answerNumberOptionList = answerNumberOptionList;
       this.$data.answerArithmeticOptionList = answerArithmeticOptionList;
       this.$data.answerNow += 1;
@@ -311,9 +336,18 @@ export default {
       }
     },
     setQuestion: function () {
+      const questReg = /^[0-9+\-*\/=]{8}/;
+
       let checkQuestion = "";
-      while (checkQuestion.length !== 8) {
-        const question = randomMathQuestion.get({
+
+      let question = {
+        question: "",
+        answer: "",
+      };
+      let questionChecker =
+        checkQuestion.length === 8 && questReg.test(question.question);
+      while (!questionChecker) {
+        question = randomMathQuestion.get({
           numberRange: "1-80",
           amountOfNumber: "2-3",
           operations: ["/", "*", "+", "-"],
@@ -323,8 +357,11 @@ export default {
         if (answerParser > 0) {
           checkQuestion = `${questionParser}=${answerParser}`;
         }
+        questionChecker =
+          checkQuestion.length === 8 && questReg.test(checkQuestion);
+        console.log("checkQuestion", checkQuestion);
       }
-      console.log("checkQuestion", checkQuestion);
+      // console.log("checkQuestion", checkQuestion);
       this.$data.questionList = checkQuestion.split("");
     },
   },
@@ -340,6 +377,11 @@ export default {
     justify-content: space-around;
     margin: 20px auto;
     max-width: 767px;
+    @media (max-width: 675px) {
+      display: block;
+      margin: 15px auto;
+      text-align: center;
+    }
     .answer-option-button {
       font-size: 2rem;
       padding: 0;
@@ -352,6 +394,13 @@ export default {
       align-items: center;
       justify-content: center;
       cursor: pointer;
+      @media (max-width: 675px) {
+        font-size: 1.5rem;
+        width: 40px;
+        height: 40px;
+        display: inline-block;
+        margin: 5px 15px;
+      }
     }
     .answer-option-button:hover {
       background-color: black;
@@ -375,6 +424,11 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
+      @media (max-width: 675px) {
+        font-size: 1.5rem;
+        width: 30px;
+        height: 30px;
+      }
     }
   }
   .action-block {
@@ -385,10 +439,19 @@ export default {
     .answer-button {
       margin: 0 15px;
       font-size: 2rem;
-      border: 2px solid gray;
       border-radius: 4px;
       background-color: transparent;
       cursor: pointer;
+      width: 180px;
+      height: 60px;
+      @media (max-width: 675px) {
+        font-size: 1rem;
+        width: 120px;
+        height: 40px;
+      }
+    }
+    .del-button {
+      border: 2px solid gray;
     }
     .del-button:active,
     .answer-button:active {
@@ -408,6 +471,48 @@ export default {
     background-color: white;
     border: 3px solid;
     font-size: 3rem;
+  }
+  .pass-text-block {
+    width: 70%;
+    padding: 20px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    background-color: rgba(174, 221, 239,0.6);
+    border-radius: 60px;
+    .refresh-button {
+      width: 240px;
+      height: 40px;
+      background-color: rgba(177, 211, 197,0.5);
+      border-radius: 4px;
+      cursor: pointer;
+      border: 0.5px solid;
+    }
+  }
+  .example-block {
+    text-align: center;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+    .example-color-block {
+      height: 30px;
+      width: 30px;
+      border-radius: 30px;
+      display: inline-block;
+    }
+    .example-text {
+      display: inline-block;
+      margin: 0;
+    }
+    .example-text:nth-child(2n) {
+      margin: 0px 5px;
+    }
   }
 }
 </style>
