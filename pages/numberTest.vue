@@ -107,7 +107,7 @@ export default {
       } else if (status === "wrong-side") {
         return "#deb3cf";
       } else if (status === "wrong-answer") {
-        return "#EEB8B8";
+        return "#C0C0C0";
       } else if (status === "correct-answer") {
         return "#b0e0e6";
       }
@@ -211,7 +211,7 @@ export default {
         const submitList = answerList[answerNow].map((answer) => answer.value);
         const submitSplitList = submitList.join("").split("=");
         if (submitSplitList.length === 2) {
-          const evalList = eval(submitSplitList[0]);
+          const evalList = Function('return (' + submitSplitList[0] + ')')();
           const equalList = submitSplitList[1];
           const googAnswer = +evalList === +equalList;
           if (!googAnswer) {
@@ -348,7 +348,7 @@ export default {
         checkQuestion.length === 8 && questReg.test(question.question);
       while (!questionChecker) {
         question = randomMathQuestion.get({
-          numberRange: "1-80",
+          numberRange: "1-999",
           amountOfNumber: "2-3",
           operations: ["/", "*", "+", "-"],
         });

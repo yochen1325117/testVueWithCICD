@@ -2,7 +2,7 @@ export default {
   mode: 'universal',
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'nuxt && github page test Area - 銓',
+    title: 'github page test Lab - 銓',
     htmlAttrs: {
       lang: 'zh-tw'
     },
@@ -18,8 +18,8 @@ export default {
   },
   target: 'static',
   server: {
-    port: 80, // default: 3000
-    host: '0.0.0.0'
+    port: 7777, // default: 3000
+    // host: '0.0.0.0'
   },
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
