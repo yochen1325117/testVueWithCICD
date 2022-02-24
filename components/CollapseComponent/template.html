@@ -1,0 +1,11 @@
+<div class="collapse-block">
+  <p class="collapse-title">
+    {{ collapseTitle }}
+    <button class="sort-button" @click="collapseClick">
+      收合/展開
+    </button>
+  </p>
+  <div class="collapse-text-block" :style="{ height: collapse ? 0 : 'auto' }">
+    <slot></slot>
+  </div>
+</div>

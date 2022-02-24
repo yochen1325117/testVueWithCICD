@@ -66,6 +66,7 @@
       <p>重新整理可以再玩一次唷</p>
       <button class="refresh-button" @click="() => { this.$router.go(0); }">重新整理</button>
     </div>
+    <p style="text-align: center">來源：<a href="https://nerdlegame.com/">nerdlegame</a></p>
   </div>
 </template>
 

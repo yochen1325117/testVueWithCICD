@@ -1,0 +1,23 @@
+.collapse-block {
+    position: relative;
+    .collapse-text-block {
+      overflow: hidden;
+      transition: height 0.5s ease-in-out;
+    }
+    .collapse-title {
+      position: relative;
+      font-size: 1.5rem;
+      color: orangered;
+      margin: 5px 0 0;
+    }
+    .sort-button {
+      position: absolute;
+      top: 0.35rem;
+      right: 0;
+      background-color: transparent;
+      border: 2px solid #333;
+      border-radius: 4px;
+      font-size: 0.5rem;
+      cursor: pointer;
+    }
+  }
