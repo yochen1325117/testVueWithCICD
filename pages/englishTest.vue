@@ -1,8 +1,6 @@
 <template>
   <div class="englishTest">
-    englishTest
-    <!-- <p>{{ randomWord }}</p> -->
-    <div class="answer-block">
+    <div class="answer-block" v-if="!passBlock && answerNow < 6">
       <div
         class="answer-list"
         v-for="(answerblock, i) in answerList"
@@ -18,7 +16,7 @@
         </div>
       </div>
     </div>
-    <div class="answer-option">
+    <div class="answer-option" v-if="!passBlock && answerNow < 6">
       <button
         v-for="englishOption in answerEnglishOptionList"
         :key="englishOption.text"
@@ -29,7 +27,7 @@
         {{ englishOption.text }}
       </button>
     </div>
-    <div class="example-block">
+    <div class="example-block" v-if="!passBlock && answerNow < 6">
       <div
         class="example-color-block"
         :style="{ backgroundColor: answerBackground('wrong-side') }"
@@ -46,8 +44,12 @@
       ></div>
       <p class="example-text">表示未出現</p>
     </div>
-    <div class="error-text-block" v-if="!!errorText">{{ errorText }}</div>
-    <div class="pass-text-block" v-if="!!passBlock">
+        <div class="action-block" v-if="!passBlock && answerNow < 6">
+      <button class="del-button" @click="popAnswer()">{{ "&lt;=" }}</button>
+      <button class="answer-button" @click="checkAnswer()">送出</button>
+    </div>
+    <div class="error-text-block" v-show="!!errorText">{{ errorText }}</div>
+    <div class="pass-text-block" v-show="!!passBlock">
       <p>恭喜過關</p>
       <p>你總共嘗試了{{ answerNow + 1 }}次</p>
       <p>重新整理可以再玩一次唷</p>
@@ -293,7 +295,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 20px auto;
+    margin: 10px auto;
     max-width: 767px;
     flex-wrap: wrap;
     @media (max-width: 675px) {
@@ -309,7 +311,7 @@ export default {
       max-width: 50px;
       height: 50px;
       flex: 1 0 10%;
-      margin: 10px;
+      margin: 5px;
       border-radius: 10px;
       display: flex;
       align-items: center;
@@ -420,7 +422,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px 0;
+    padding: 0;
     .example-color-block {
       height: 30px;
       width: 30px;
