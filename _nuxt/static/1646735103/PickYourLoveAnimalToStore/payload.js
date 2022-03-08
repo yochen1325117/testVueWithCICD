@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/PickYourLoveAnimalToStore", {data:[{}],fetch:{},mutations:[]});
