@@ -106,19 +106,20 @@ export default {
       return "transparent";
     },
     async getEnglishWordList() {
-      const { data: getWordJsonRes } = await this.$axios.get(
-        "https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english.txt"
-      );
-      const wordList = getWordJsonRes.split(/\s/);
-      this.$data.wordList = wordList;
+      // const { data: getWordJsonRes } = await this.$axios.get(
+      //   "https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english.txt"
+      // );
+      // const wordList = getWordJsonRes.split(/\s/);
+      this.$data.wordList = englishJson;
       this.setEnglishWord();
-      const test = await this.$axios.get('https://www.thefreedictionary.com/apple');
-      console.log('test', test);
-      console.log('englishJson', englishJson);
+      // const test = await this.$axios.get('https://www.thefreedictionary.com/apple');
+      // console.log('test', test);
+      // console.log('englishJson', englishJson);
     },
     setEnglishWord() {
       const wordList = this.$data.wordList;
-      const randomWordNumber = Math.round(Math.random() * 9999);
+      console.log('wordList', wordList);
+      const randomWordNumber = Math.round(Math.random() * wordList.length);
       const randomWord = wordList[randomWordNumber];
       this.$data.randomWordNumber = randomWordNumber;
       this.$data.randomWord = randomWord;
@@ -216,6 +217,11 @@ export default {
         } else {
           this.countAnswer(answerString);
         }
+      } else {
+      this.$data.errorText = "??";
+        setTimeout(() => {
+          this.$data.errorText = "";
+        }, 1000);
       }
     },
     countAnswer(answerString) {
