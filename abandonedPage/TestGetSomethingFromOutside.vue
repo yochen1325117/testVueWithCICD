@@ -83,11 +83,11 @@ export default {
     },
   },
   async asyncData(content) {
-    const apiResponse = await content.$axios.get(
-      "https://od.moi.gov.tw/api/v1/rest/datastore/301000000A-001661-005"
-    );
+    // const apiResponse = await content.$axios.get(
+    //   "https://od.moi.gov.tw/api/v1/rest/datastore/301000000A-001661-005"
+    // );
     // const data = apiResponse.data || {};
-    const result = apiResponse.data.result || {};
+    const result = {};
     const fields = result.fields || [];
     const records = result.records || [];
     const dataTitle = [];

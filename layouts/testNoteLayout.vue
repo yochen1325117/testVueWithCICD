@@ -4,7 +4,7 @@
           <nuxt-link class="navigation-link" to="/">練習筆記-銓</nuxt-link>
           <nuxt-link class="navigation-link" to="/createProjectNote">部署/建立筆記-銓</nuxt-link>
           <nuxt-link class="navigation-link" to="/ModelCollectionArea">公仔照片筆記-銓</nuxt-link>
-          <nuxt-link class="navigation-link" to="/TestGetSomethingFromOutside">抓抓-銓</nuxt-link>
+          <!-- <nuxt-link class="navigation-link" to="/TestGetSomethingFromOutside">抓抓-銓</nuxt-link> -->
           <nuxt-link class="navigation-link" to="/imageAnimation">圖片動畫測試-銓</nuxt-link>
           <nuxt-link class="navigation-link" to="/PickYourLoveAnimalToStore">你喜歡什麼動物呢-銓</nuxt-link>
           <nuxt-link class="navigation-link" to="/ScrollLikePixelPage">滾動調整-銓</nuxt-link>
